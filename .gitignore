@@ -1,9 +1,11 @@
-<<<<<<< HEAD
+# Dependencies
 node_modules/
+
+# Local settings (keep the template)
 .env
 .env.*
 !.env.example
-=======
+
 # Logs
 logs
 *.log
@@ -161,4 +163,3 @@ vite.config.ts.timestamp-*
 .nx/cache
 .nx/workspace-data
 .nx/migrate-runs
->>>>>>> e5bbb526d68af4492348aeaa841a73507a58a191
