@@ -4,23 +4,13 @@ LAN Distributed Music Integrated Node Engine :)
 Maybe start a group Jam, everybody adds to queue, everybody enjoys!
 
 ---
-<img width="1454" height="967" alt="image" src="https://github.com/user-attachments/assets/c630159e-27ee-44e4-b28f-502f073f3975" />
+<img width="1454" height="967" alt="image" src="https://github.com/user-attachments/assets/c630159e-27ee-44e4-b28f-502f073f3975" />  
+One computer runs LANDMINE, and every phone
+or laptop on the same Wi-Fi opens a web page and joins the same queue. Sound
+comes out of one device at a time. choose which one with **Playing on**, and
+hand the music around without stopping it
 
 ---
-
-<img width="267" height="49" alt="LANDMINE" src="https://github.com/user-attachments/assets/3030104c-c9af-4a51-9c8b-eea4a57e6db9" />
-
-**L**AN **D**istributed **M**usic **I**ntelligence **N**ode **E**ngine
-Locally shared music player for a room. One computer runs LANDMINE, and every phone
-or laptop on the same Wi-Fi opens a web page and joins the same queue. Sound
-comes out of one device at a time — choose which one with **Playing on**, and
-hand the music around without stopping it.
-
-No accounts, no apps to install on phones. Maybe start a group jam: everybody
-adds to the queue, everybody enjoys.
-
-<img width="1454" height="967" alt="LANDMINE player, queue and search" src="https://github.com/user-attachments/assets/c630159e-27ee-44e4-b28f-502f073f3975" />
-
 ## What it does
 
 - **One shared queue.** History, now playing and up next are a single list
@@ -35,8 +25,6 @@ adds to the queue, everybody enjoys.
   computers, keyboard shortcuts, media keys and per-device themes.
 - **An optional DJ.** Gemini suggests songs in the mood you pick, tops the
   queue up before it runs dry, and skips misses and duplicates.
-- **Tracks are ready ahead of time.** The current song and the next few are
-  downloaded to disk, so playback and seeking are smooth.
 - **Honest failures.** A song that can't be fetched is labelled "Unavailable"
   with a plain reason and skipped, instead of spewing errors at you.
 
@@ -90,13 +78,6 @@ The DJ is off until you give it a key. Copy `.env.example` to `.env` and add:
 ```
 GEMINI_API_KEY=your_key
 ```
-## The DJ
-
-Gemini only proposes titles. Each one is matched to a real YouTube result, and
-misses and duplicates are dropped. It tops the queue up once the last track is
-half over. Setting a mood lines tracks up right after the current song.  
-
-<img width="659" height="329" alt="image" src="https://github.com/user-attachments/assets/e4af76e8-2def-48ee-937e-b59d8065595d" />
 
 
 
@@ -151,7 +132,7 @@ required for the basic player; everything is optional.
 | `YTDLP_EXTRA_ARGS` | Extra yt-dlp flags, space separated. |
 | `CACHE_DIR`, `CACHE_MAX_TRACKS` | Where downloaded tracks live (default: temp dir, 80 tracks). |
 | `PORT` | Defaults to 3000. |
->>>>>>> ad54f94 (Commiting 2.1.5 Setup Addons)
+
 
 ## Tests
 
