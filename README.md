@@ -1,6 +1,12 @@
 # LANDMINE
+
 LAN Distributed Music Integrated Node Engine :)   
 Maybe start a group Jam, everybody adds to queue, everybody enjoys!
+
+---
+<img width="1454" height="967" alt="image" src="https://github.com/user-attachments/assets/c630159e-27ee-44e4-b28f-502f073f3975" />
+
+---
 
 One server holds the queue and the playback state. Any phone or laptop on the
 same Wi-Fi opens the page and gets the full player. Sound comes out of one
@@ -20,6 +26,16 @@ Put settings in a `.env` file next to `package.json`:
 ```
 GEMINI_API_KEY=your_key
 ```
+## The DJ
+
+Gemini only proposes titles. Each one is matched to a real YouTube result, and
+misses and duplicates are dropped. It tops the queue up once the last track is
+half over. Setting a mood lines tracks up right after the current song.  
+
+
+<img width="985" height="595" alt="image" src="https://github.com/user-attachments/assets/3cc1b2b2-dd4f-4d91-a701-c47b5f62fb15" />
+
+
 
 ## Environment variables
 
@@ -64,11 +80,7 @@ A track that still can't be fetched is marked "Unavailable" with a plain reason
 short message instead of a stack of errors. Server logs carry yt-dlp's own
 last lines for anything odd.
 
-## The DJ
 
-Gemini only proposes titles. Each one is matched to a real YouTube result, and
-misses and duplicates are dropped. It tops the queue up once the last track is
-half over. Setting a mood lines tracks up right after the current song.
 
 ## Tests
 
