@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0e10">
+<title>LANDMINE</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c8ff2e' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23c8ff2e'/%3E%3Cpath d='M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- Player. A side panel on wide screens, a full-screen sheet on phones. -->
+  <aside class="deck" id="deck" aria-label="Now playing">
+    <div class="deck-top">
+      <button class="icon-btn deck-close" id="deck-close" aria-label="Close player" data-ic="chevdown"></button>
+      <span class="label">Now playing</span>
+    </div>
+
+    <div class="art is-empty" id="art">
+      <img id="np-art" alt="" referrerpolicy="no-referrer">
+      <div class="art-empty" data-ic="mine"></div>
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="np">
+      <h2 id="np-title">Nothing queued</h2>
+      <p class="np-artist" id="np-artist">Search for a track or ask the DJ</p>
+      <p class="np-state" id="np-state"></p>
+    </div>
+
+    <div class="scrub">
+      <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+      <div class="times"><span id="t-now">0:00</span><span id="t-end">0:00</span></div>
+    </div>
+
+    <div class="transport">
+      <button class="icon-btn" id="b-shuffle" aria-label="Shuffle up next" title="Shuffle up next (reorders the queue)"></button>
+      <button class="icon-btn" id="b-prev" aria-label="Previous" title="Previous"></button>
+      <button class="play-btn" id="b-play" aria-label="Play"></button>
+      <button class="icon-btn" id="b-next" aria-label="Next" title="Next"></button>
+      <button class="icon-btn" id="b-repeat" aria-label="Repeat" title="Repeat"></button>
+    </div>
+
+    <div class="deck-foot">
+      <button class="device-btn" id="device-btn" aria-haspopup="dialog">
+        <span id="device-ic"></span>
+        <span class="device-text"><small>Playing on</small><b id="device-label">This device</b></span>
+      </button>
+      <div class="vol">
+        <button class="icon-btn sm" id="b-mute" aria-label="Mute"></button>
+        <input type="range" id="volume" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+    </div>
+  </aside>
+
+  <section class="main">
+
+    <header class="brand">
+      <span class="brand-mark" data-ic="mine"></span>
+      <span class="brand-name">LANDMINE</span>
+      <span class="lamp" id="lamp" title="Connection"></span>
+    </header>
+
+    <nav class="nav" id="nav" aria-label="Sections">
+      <button class="nav-btn is-on" data-view="queue"><span data-ic="queue"></span><span class="nav-label">Queue</span></button>
+      <button class="nav-btn" data-view="search"><span data-ic="search"></span><span class="nav-label">Search</span></button>
+      <button class="nav-btn" data-view="dj"><span data-ic="dj"></span><span class="nav-label">DJ</span></button>
+      <button class="nav-btn" data-view="settings"><span data-ic="settings"></span><span class="nav-label">Settings</span></button>
+    </nav>
+
+    <!-- Queue -->
+    <div class="view is-on" data-view="queue">
+      <div class="view-head">
+        <div>
+          <h1>Queue</h1>
+          <p class="meta" id="queue-meta">Connecting…</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn" id="q-shuffle" title="Randomise the order of what is up next"><span data-ic="shuffle"></span>Shuffle</button>
+          <button class="btn ghost" id="q-clear" title="Remove everything after the current track">Clear up next</button>
+        </div>
+      </div>
+      <div class="view-body" id="queue-body"></div>
+    </div>
+
+    <!-- Search -->
+    <div class="view" data-view="search">
+      <div class="search-bar">
+        <label class="field">
+          <span data-ic="search"></span>
+          <input type="search" id="search-input" placeholder="Search, or paste a YouTube link" autocomplete="off" spellcheck="false" enterkeyhint="search">
+        </label>
+      </div>
+      <div class="view-body" id="results"></div>
+    </div>
+
+    <!-- DJ -->
+    <div class="view" data-view="dj">
+      <div class="panel">
+        <h1>DJ</h1>
+        <p class="status" id="dj-status"><i class="status-dot"></i><span id="dj-status-text"></span></p>
+
+        <section class="card">
+          <h2>Mood</h2>
+          <p class="hint">Pick a mood and the DJ lines up tracks for it, right after the current song.</p>
+          <div class="chips" id="moods"></div>
+          <div class="inline">
+            <label class="field grow"><input type="text" id="mood-input" placeholder="Or describe your own" maxlength="80"></label>
+            <button class="btn solid" id="mood-go">Set</button>
+          </div>
+          <button class="btn ghost" id="mood-clear" hidden>Clear mood</button>
+        </section>
+
+        <section class="card">
+          <label class="switch-row">
+            <span class="switch-text"><b>Keep the queue topped up</b><small>When the last track is half over, the DJ adds more in the same vein.</small></span>
+            <span class="switch"><input type="checkbox" id="dj-enabled"><i></i></span>
+          </label>
+          <button class="btn" id="dj-fill"><span data-ic="dj"></span>Add songs now</button>
+        </section>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="view" data-view="settings">
+      <div class="panel">
+        <h1>Settings</h1>
+
+        <section class="card">
+          <h2>This device</h2>
+          <p class="hint">The name people see in the “Playing on” list.</p>
+          <div class="inline">
+            <label class="field grow"><input type="text" id="device-name" maxlength="32" placeholder="Device name"></label>
+            <button class="btn solid" id="device-name-save">Save</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Playback</h2>
+          <label class="switch-row">
+            <span class="switch-text"><b>Skip tracks that can't be played</b><small>Moves on by itself and tells you once. Off means playback stops on the problem track.</small></span>
+            <span class="switch"><input type="checkbox" id="set-autoskip"><i></i></span>
+          </label>
+        </section>
+
+        <section class="card">
+          <h2>Appearance</h2>
+          <p class="hint">Applies to this device only.</p>
+          <div class="themes" id="themes"></div>
+          <div class="pickers">
+            <label class="picker"><input type="color" id="pick-accent"><span>Accent</span></label>
+            <label class="picker"><input type="color" id="pick-bg"><span>Background</span></label>
+            <button class="btn ghost" id="theme-reset">Reset</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Keyboard</h2>
+          <dl class="keys">
+            <div><dt><kbd>Space</kbd></dt><dd>Play / pause</dd></div>
+            <div><dt><kbd>N</kbd> <kbd>P</kbd></dt><dd>Next / previous</dd></div>
+            <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Seek 10 seconds</dd></div>
+            <div><dt><kbd>/</kbd></dt><dd>Search</dd></div>
+          </dl>
+          <p class="hint">Your keyboard's media keys work too while this device is the speaker.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- Mini player: phones only -->
+    <div class="mini" id="mini">
+      <div class="mini-bar"></div>
+      <button class="mini-open" id="mini-open" aria-label="Open player">
+        <img id="mini-art" alt="" referrerpolicy="no-referrer">
+        <span class="mini-text"><b id="mini-title">Nothing queued</b><span id="mini-artist"></span></span>
+      </button>
+      <button class="icon-btn" id="mini-play" aria-label="Play"></button>
+      <button class="icon-btn" id="mini-next" aria-label="Next" data-ic="next"></button>
+    </div>
+
+  </section>
+</div>
+
+<dialog id="device-dialog" aria-labelledby="dd-title">
+  <div class="dialog-head">
+    <h2 id="dd-title">Play on</h2>
+    <button class="icon-btn sm" id="device-close" aria-label="Close" data-ic="x"></button>
+  </div>
+  <ul class="device-list" id="device-list"></ul>
+  <p class="hint dialog-hint">Playback moves instantly and carries on from the same moment.</p>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<div class="gate" id="gate" role="alert" hidden>
+  <span>This browser is blocking sound until you tap.</span>
+  <button class="btn solid" id="gate-btn">Enable sound</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

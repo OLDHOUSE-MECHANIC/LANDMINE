@@ -1,0 +1,20 @@
+{
+  "name": "landmine",
+  "version": "3.0.0",
+  "description": "LAN Distributed Music Intelligence Node Engine",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
