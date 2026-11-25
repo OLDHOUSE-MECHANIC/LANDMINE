@@ -1,4 +1,6 @@
-# LANDMINE
+<img width="267" height="49" alt="image" src="https://github.com/user-attachments/assets/3030104c-c9af-4a51-9c8b-eea4a57e6db9" />  
+
+ 
 
 LAN Distributed Music Integrated Node Engine :)   
 Maybe start a group Jam, everybody adds to queue, everybody enjoys!
