@@ -32,8 +32,7 @@ Gemini only proposes titles. Each one is matched to a real YouTube result, and
 misses and duplicates are dropped. It tops the queue up once the last track is
 half over. Setting a mood lines tracks up right after the current song.  
 
-
-<img width="985" height="595" alt="image" src="https://github.com/user-attachments/assets/3cc1b2b2-dd4f-4d91-a701-c47b5f62fb15" />
+<img width="659" height="329" alt="image" src="https://github.com/user-attachments/assets/e4af76e8-2def-48ee-937e-b59d8065595d" />
 
 
 
