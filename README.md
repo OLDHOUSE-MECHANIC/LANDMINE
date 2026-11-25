@@ -1,6 +1,6 @@
 # LANDMINE
-
-**L**AN **D**istributed **M**usic **I**ntelligence **N**ode **E**ngine
+LAN Distributed Music Integrated Node Engine :)   
+Maybe start a group Jam, everybody adds to queue, everybody enjoys!
 
 One server holds the queue and the playback state. Any phone or laptop on the
 same Wi-Fi opens the page and gets the full player. Sound comes out of one
